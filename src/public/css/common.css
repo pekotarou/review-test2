@@ -1,0 +1,40 @@
+/* 全体 */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f5f5;
+}
+
+/* ヘッダー */
+.header {
+    background: #e6e6e6;
+    padding: 15px 40px;
+}
+
+.logo {
+    color: #f4b400;
+    font-size: 24px;
+    font-style: italic;
+    font-weight: bold;
+}
+
+/* コンテナ */
+.container {
+    padding: 30px 60px;
+}
+
+/* タイトル＋追加ボタン */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-button {
+    background: #f4b400;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
