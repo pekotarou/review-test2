@@ -16,14 +16,17 @@ class ProductController extends Controller
         $products;
         $data;
 
-        //キーワードもソートも無しの場合
+        
         if(empty($keyword)&&empty($sort)) {
+            //キーワードもソートも無しの場合
             $products = Product::paginate(6);
         }elseif($keyword&&empty($sort)){
+            //キーワード有りソート無しの場合
             $data = Product::query();
             $data->where('name', 'LIKE', "%{$keyword}%")->get();
             $products = $data->paginate(6)->appends($request->all());
         }elseif($keyword&&$sort){
+            //キーワード有りソート有りの場合
             $data = Product::query();
             $data->where('name', 'LIKE', "%{$keyword}%")->get();
             if ($request->sort === 'high') {
@@ -33,6 +36,7 @@ class ProductController extends Controller
             }
             $products = $data->paginate(6)->appends($request->all());
         }elseif(empty($keyword)&&$sort){
+            //キーワード無しソート有りの場合
             $data = Product::query();
             if ($request->sort === 'high') {
                 $data->orderBy('price', 'desc');
@@ -77,10 +81,10 @@ class ProductController extends Controller
             }elseif ( $sort === 'low') {
                 $data->orderBy('price', 'asc');
             }
-         $products = $data->paginate(6)->appends($request->all());
-        return view('index')->with('products',$products)
-        ->with('keyword',$keyword)
-        ->with('sort',$sort);
+            $products = $data->paginate(6)->appends($request->all());
+            return view('index')->with('products',$products)
+            ->with('keyword',$keyword)
+            ->with('sort',$sort);
         }
 }
 }
