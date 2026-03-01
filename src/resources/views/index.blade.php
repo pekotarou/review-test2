@@ -38,7 +38,7 @@
             <label>価格順で表示</label>
             <form method="GET" action="/products" >
                 @if(request()->filled('keyword'))
-                        <input type="hidden" name="keyword" value="{{ $keyword }}">
+                    <input type="hidden" name="keyword" value="{{ $keyword }}">
                 @endif
                 <select name="sort" onchange="this.form.submit()" class="sort-select">
                     <option value="">価格で並べ替え</option>
@@ -65,6 +65,7 @@
             </div>
         @endif
         </div>
+        <div class="line"></div>
 
     </aside>
 

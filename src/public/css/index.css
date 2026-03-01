@@ -10,6 +10,7 @@
 .sidebar {
     width: 250px;
     margin-right: 30px;
+
 }
 
 .search-input {
@@ -17,6 +18,11 @@
     padding: 10px;
     border-radius: 20px;
     border: 1px solid #ddd;
+}
+
+.line{
+    border-bottom: 1px solid rgb(210, 210, 210);
+    margin: 15px auto;
 }
 
 .search-button {
