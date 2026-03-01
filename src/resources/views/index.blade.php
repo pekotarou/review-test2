@@ -9,7 +9,7 @@
 
 
 <div class="page-header">
-    @if(request()->has('keyword'))
+    @if(request()->filled('keyword'))
      <h1>"{{ $keyword }}"の商品一覧</h1>
     @else
     <h1>商品一覧</h1>
@@ -24,7 +24,7 @@
         <form class="search-form" action="/products/search" method="get" >
             @csrf
             <div class="search-form__item">
-                @if(request()->has('keyword'))
+                @if(request()->filled('keyword'))
                 <input class="search-input" type="text" placeholder="{{ $keyword }}" name="keyword" value="{{ old('keyword') }}" />
                 @else
                 <input class="search-input" type="text" placeholder="商品名で検索" name="keyword" value="{{ old('keyword') }}" />
@@ -37,7 +37,7 @@
         <div class="sort-area">
             <label>価格順で表示</label>
             <form method="GET" action="/products" >
-                @if(request()->has('keyword'))
+                @if(request()->filled('keyword'))
                         <input type="hidden" name="keyword" value="{{ $keyword }}">
                 @endif
                 <select name="sort" onchange="this.form.submit()" class="sort-select">

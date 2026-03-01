@@ -85,6 +85,9 @@ class ProductController extends Controller
             return view('index')->with('products',$products)
             ->with('keyword',$keyword)
             ->with('sort',$sort);
+        }else{
+            $products = $data->paginate(6)->appends($request->all());
+            return view('index')->with('products',$products);
         }
 }
 }
