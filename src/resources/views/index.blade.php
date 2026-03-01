@@ -1,3 +1,4 @@
+<!--　商品一覧ページ　-->
 @extends('layouts.app')
 
 @section('css')
@@ -5,28 +6,58 @@
 @endsection
 
 @section('content')
+
+
 <div class="page-header">
     <h1>商品一覧</h1>
-    <a href="#" class="add-button">+ 商品を追加</a>
+    <a href="/products/register" class="add-button">+ 商品を追加</a>
 </div>
 
 <div class="content-wrapper">
 
     <!-- サイドバー -->
     <aside class="sidebar">
-        <form>
-            <input type="text" placeholder="商品名で検索" class="search-input">
-            <button type="submit" class="search-button">検索</button>
-
-            <div class="sort-area">
-                <label>価格順で表示</label>
-                <select class="sort-select">
-                    <option>価格で並べ替え</option>
-                    <option value="asc">安い順</option>
-                    <option value="desc">高い順</option>
-                </select>
+        <form class="search-form" action="/products/search" method="get" >
+            @csrf
+            <div class="search-form__item">
+                <input class="search-input" type="text" placeholder="商品名で検索" name="keyword" value="{{ old('keyword') }}" />
+            </div>
+            <div class="search-form__button">
+                <button class="search-button" type="submit">検索</button>
             </div>
         </form>
+        <div class="sort-area">
+            <label>価格順で表示</label>
+            <form method="GET" action="/products" >
+                @if(request()->has('keyword'))
+                        <input type="hidden" name="keyword" value="{{ $keyword }}">
+                    @endif
+                <select name="sort" onchange="this.form.submit()" class="sort-select">
+                    <option value="">価格で並べ替え</option>
+                    <option value="high" {{ request('sort')=='high'?'selected':'' }}>高い順に表示</option>
+                    <option value="low" {{ request('sort')=='low'?'selected':'' }}>低い順に表示</option>
+                </select>
+            </form>
+        @if(request('sort') == 'high')
+        <!-- バツを押したら並べ替えだけリセットバージョン -->
+            <div class="sort-tag">
+                <span class="tag-text">高い順に表示</span>
+                <a href="{{ route('/products', request()->except('sort')) }}" class="tag-close">
+                    ×
+                </a>
+            </div>
+        @endif
+        @if(request('sort') == 'low')
+        <!-- バツを押したら全てリセットバージョン -->
+            <div class="sort-tag">
+                <span class="tag-text">低い順に表示</span>
+                <a href="/products" class="tag-close">
+                    ×
+                </a>
+            </div>
+        @endif
+        </div>
+
     </aside>
 
     <!-- 商品一覧 -->

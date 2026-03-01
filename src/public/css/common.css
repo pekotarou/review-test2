@@ -30,6 +30,10 @@ body {
     align-items: center;
 }
 
+.page-header__form{
+ 
+}
+
 .add-button {
     background: #f4b400;
     padding: 10px 16px;
@@ -37,4 +41,5 @@ body {
     text-decoration: none;
     color: #000;
     font-weight: bold;
+    border: none;
 }

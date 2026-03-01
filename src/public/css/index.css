@@ -74,3 +74,39 @@
     margin-top: 30px;
     text-align: center;
 }
+
+.sort-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border: 2px solid #f4b400;
+    border-radius: 30px;
+    background: #fff;
+    font-size: 14px;
+    color: #666;
+    gap: 8px;
+    margin: 10px auto;
+}
+
+.tag-text {
+    white-space: nowrap;
+}
+
+.tag-close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #fff;
+    color: #f4b400;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 1;
+    border: 2px solid #f4b400;}
+
+.tag-close:hover {
+    opacity: 0.8;
+}
