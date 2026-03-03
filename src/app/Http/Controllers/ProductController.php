@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;  
+use App\Models\Product;
+use App\Models\Season;
+
 
 class ProductController extends Controller
 {
 
-    //商品一覧ページ（最初）
+    //商品一覧ページ表示
     public function index(Request $request)
     {
         $keyword = $request->input('keyword');
@@ -50,25 +52,21 @@ class ProductController extends Controller
         return view('index')->with('products',$products)
         ->with('keyword',$keyword)
         ->with('sort',$sort);
-
-
     }
+
+    //商品登録ページ表示
     public function add()
     {
-        $products = Product::paginate(6); //エラー回避のため仮置き
-        return view('add', compact('products'));
-    }
+        $seasons = Season::all();
+        return view('create', compact('seasons'));
 
-    public function store(TodoRequest $request)
-    {
-        $todo = $request->only(['content']);
-        Todo::create($todo);
-        return redirect('/')->with('message', 'Todoを作成しました');
     }
 
 
+
+    //検索時の関数
     public function search(Request $request)
-{
+    {
    /* テーブルから全てのレコードを取得する */
         $data = Product::query();
         /* キーワードから検索処理 */
@@ -89,5 +87,47 @@ class ProductController extends Controller
             $products = $data->paginate(6)->appends($request->all());
             return view('index')->with('products',$products);
         }
+    }
+
+
+
+
+
+    //商品登録ページ
+    public function store(Request $request)
+{
+    // バリデーションの内容、後で別で作る、仮置き
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'price' => 'required|integer|min:0',
+        'image' => 'required|image|mimes:jpg,jpeg,png',
+        'description' => 'required|string',
+        'seasons' => 'required|array',
+        'seasons.*' => 'exists:seasons,id'
+    ]);
+
+    //画像保存先
+    $path = $request->file('image')->store('products', 'public');
+
+    //productsへ保存
+    $product = Product::create([
+        'name' => $request->name,
+        'price' => $request->price,
+        'image' => $path, 
+        'description' => $request->description,
+    ]);
+
+
+    //中間テーブルへ保存
+    $product->seasons()->attach($request->seasons);
+
+    //とりあえず登録後は商品一覧へ
+    return redirect()->route('/products');//商品一覧へ戻る
 }
+
+
+
+
+
+
 }

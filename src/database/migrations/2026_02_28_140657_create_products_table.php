@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('name');          // 商品名
             $table->integer('price');        // 価格
             $table->string('image');         // 画像パス
-            $table->text('description')->nullable(); // 商品説明
+            $table->text('description'); // 商品説明
             $table->timestamps();
         });
     }

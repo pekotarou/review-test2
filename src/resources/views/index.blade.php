@@ -10,7 +10,7 @@
 
 <div class="page-header">
     @if(request()->filled('keyword'))
-     <h1>"{{ $keyword }}"の商品一覧</h1>
+     <h1>“{{ $keyword }}”の商品一覧</h1>
     @else
     <h1>商品一覧</h1>
     @endif
@@ -47,7 +47,7 @@
                 </select>
             </form>
         @if(request('sort') == 'high')
-        <!-- バツを押したら並べ替えだけリセットバージョン -->
+        <!-- バツを押したら並べ替えだけリセットされる（キーワード選択している場合は保持される） -->
             <div class="sort-tag">
                 <span class="tag-text">高い順に表示</span>
                 <a href="{{ route('/products', request()->except('sort')) }}" class="tag-close">
@@ -56,10 +56,9 @@
             </div>
         @endif
         @if(request('sort') == 'low')
-        <!-- バツを押したら全てリセットバージョン -->
             <div class="sort-tag">
                 <span class="tag-text">低い順に表示</span>
-                <a href="/products" class="tag-close">
+                <a href="{{ route('/products', request()->except('sort')) }}" class="tag-close">
                     ×
                 </a>
             </div>
