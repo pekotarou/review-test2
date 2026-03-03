@@ -5,11 +5,8 @@ body {
 
 .register-container {
     width: 700px;
-    margin: 50px auto;
- 
-    padding: 40px;
-
- 
+    margin: 0 0 0 250px;
+}
 
 .page-title {
     font-size: 22px;
@@ -31,7 +28,6 @@ body {
     color: #fff;
     font-size: 12px;
     padding: 2px 6px;
-    border-radius: 4px;
     margin-left: 6px;
 }
 
@@ -47,7 +43,7 @@ input[type="file"],
 textarea {
     width: 100%;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 4px;
     border: 1px solid #ddd;
     font-size: 14px;
 }
@@ -77,6 +73,8 @@ textarea {
     text-decoration: none;
     color: #333;
     font-weight: bold;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.15);
+
 }
 
 .btn-submit {
@@ -85,4 +83,62 @@ textarea {
     padding: 10px 40px;
     border-radius: 8px;
     font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.15);
+}
+
+input[type="file"] {
+    border: none;
+    outline: none;
+}
+
+
+/* 横並び */
+.radio-group {
+    display: flex;
+    gap: 24px;
+}
+
+/* ラベル */
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+/* デフォルトUIを消す */
+.radio-group input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+/* チェック時の丸 */
+.radio-group input[type="checkbox"]:checked {
+    background-color: #333;
+    border-color: #333;
+}
+
+/* ✔︎マークを表示 */
+.radio-group input[type="checkbox"]:checked::after {
+    content: "✓";
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+}
+
+.error-message{
+    color: red;
+    margin: 8px auto;
 }

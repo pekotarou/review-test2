@@ -25,7 +25,7 @@
 
         <!-- 検索フォーム -->
         <form class="search-form"
-              action="{{ route('products.index') }}"
+              action="{{ route('products.search') }}"
               method="GET">
 
             <!-- 並び替えを保持 -->
@@ -62,7 +62,7 @@
 
                 <select name="sort"
                         onchange="this.form.submit()"
-                        class="sort-select">
+                        class="sort-select" required >
 
                     <option value="">価格で並べ替え</option>
 
@@ -107,7 +107,6 @@
             <div class="product-card">
                 <img src="{{ asset('storage/' . $product->image) }}"
                      alt="{{ $product->name }}">
-
                 <div class="product-info">
                     <span>{{ $product->name }}</span>
                     <span>¥{{ number_format($product->price) }}</span>

@@ -1,3 +1,14 @@
+.add-button {
+    background: #ffa929;
+    padding: 10px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.15);
+}
+
 
 
 /* メイン構造 */
@@ -26,6 +37,7 @@
 }
 
 .search-button {
+    box-shadow: 0px 10px 6px rgba(0, 0, 0, 0.05);
     width: 100%;
     margin-top: 10px;
     padding: 10px;
@@ -34,6 +46,8 @@
     border-radius: 6px;
     font-weight: bold;
     cursor: pointer;
+    
+    
 }
 
 .sort-area {
@@ -44,7 +58,24 @@
     width: 100%;
     padding: 8px;
     margin-top: 5px;
+    border: 2px solid #eeeeed;
+    border-radius: 5px;
+  
 }
+
+.sort-select:invalid {
+    color: #bbb;
+}
+
+.sort-select option {
+    color: black;
+}
+
+.sort-select option:first-child {
+    color: #bbb;
+}
+
+
 
 /* 商品グリッド */
 .product-grid {
@@ -57,7 +88,7 @@
 /* 商品カード */
 .product-card {
     background: #fff;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }

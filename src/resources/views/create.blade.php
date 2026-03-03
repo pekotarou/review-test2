@@ -19,18 +19,28 @@
         <div class="form-group">
             <label>商品名 <span class="required">必須</span></label>
             <input type="text" name="name" placeholder="商品名を入力" value="{{ old('name') }}">
+            @foreach ($errors->get('name') as $message)
+                <p class="error-message">  {{$message }} </p>
+            @endforeach
+            
         </div>
 
         {{-- 価格 --}}
         <div class="form-group">
             <label>価格 <span class="required">必須</span></label>
             <input type="number" name="price" placeholder="価格を入力" value="{{ old('price') }}">
+            @foreach ($errors->get('price') as $message)
+                <p class="error-message">  {{$message }} </p>
+            @endforeach
         </div>
 
         {{-- 商品画像 --}}
         <div class="form-group">
             <label>商品画像 <span class="required">必須</span></label>
             <input type="file" name="image">
+            @foreach ($errors->get('image') as $message)
+                <p class="error-message">  {{$message }} </p>
+            @endforeach
         </div>
 
         {{-- 季節 --}}
@@ -50,6 +60,12 @@
                     </label>
                 @endforeach
             </div>
+            @foreach ($errors->get('seasons') as $message)
+                    <p class="error-message">  {{$message }} </p>
+                @endforeach
+                @foreach ($errors->get('seasons.*') as $message)
+                    <p class="error-message">  {{$message }} </p>
+                @endforeach
 
 
         </div>
@@ -58,6 +74,9 @@
         <div class="form-group">
             <label>商品説明 <span class="required">必須</span></label>
             <textarea name="description" placeholder="商品の説明を入力">{{ old('description') }}</textarea>
+            @foreach ($errors->get('description') as $message)
+                <p class="error-message">  {{$message }} </p>
+            @endforeach
         </div>
 
         <div class="button-group">
