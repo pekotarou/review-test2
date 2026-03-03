@@ -12,25 +12,53 @@ class ProductController extends Controller
 
     //商品一覧ページ表示
     public function index(Request $request)
-{
- $query = Product::query();
+    {
+        $keyword = $request->input('keyword');
+        $sort = $request->sort;
+        $products;
+        $data;
 
-    // 🔎 検索
-    if ($request->filled('keyword')) {
-        $query->where('name', 'like', '%' . $request->keyword . '%');
+        
+        if(empty($keyword)&&empty($sort)) {
+            //キーワードもソートも無しの場合
+            $products = Product::paginate(6);
+            return view('index')->with('products',$products);
+        }elseif($keyword&&empty($sort)){
+            //キーワード有りソート無しの場合
+            $data = Product::query();
+            $data->where('name', 'LIKE', "%{$keyword}%")->get();
+            $products = $data->paginate(6)->appends($request->all());
+             return view('index')->with('products',$products)
+        ->with('keyword',$keyword);
+            
+        }elseif($keyword&&$sort){
+            //キーワード有りソート有りの場合
+            $data = Product::query();
+            $data->where('name', 'LIKE', "%{$keyword}%")->get();
+            if ($sort === 'high') {
+                $data->orderBy('price', 'desc');
+            }elseif ($sort === 'low') {
+                $data->orderBy('price', 'asc');
+            }
+            $products = $data->paginate(6)->appends($request->all());
+             return view('index')->with('products',$products)
+            ->with('keyword',$keyword)
+            ->with('sort',$sort);
+        }elseif(empty($keyword)&&$sort){
+            //キーワード無しソート有りの場合
+            $data = Product::query();
+            if ($sort === 'high') {
+                $data->orderBy('price', 'desc');
+            }elseif ($sort === 'low') {
+                $data->orderBy('price', 'asc');
+            }
+            $products = $data->paginate(6)->appends($request->all());
+             return view('index')->with('products',$products)
+        ->with('sort',$sort);
+        }
+
+       
     }
-
-    // 🔽 並び替え
-    if ($request->sort === 'high') {
-        $query->orderBy('price', 'desc');
-    } elseif ($request->sort === 'low') {
-        $query->orderBy('price', 'asc');
-    }
-
-    $products = $query->paginate(6);
-
-    return view('index', compact('products'));
-}
 
     //商品登録ページ表示
     public function add()
