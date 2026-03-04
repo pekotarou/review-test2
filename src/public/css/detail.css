@@ -1,0 +1,236 @@
+.edit-wrapper {
+    max-width: 980px;
+    margin: 40px auto;
+}
+
+.top-row {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+/* 左右の幅感（スクショ寄せ） */
+.left {
+    width: 480px;
+}
+
+.right {
+    flex: 1;
+    padding-top: 30px;
+}
+
+.image-box {
+    width: 420px;
+    height: 280px;
+    margin: 0 auto 14px;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.file-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 420px;
+    margin: 0 auto;
+}
+
+.file-input {
+    display: none;
+}
+
+.file-btn {
+    padding: 6px 14px;
+    background: #e6e6e6;
+    border: 1px solid #bdbdbd;
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.file-name {
+    font-size: 13px;
+    color: #777;
+}
+
+.field {
+    margin-bottom: 22px;
+}
+
+.field-label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.input {
+    width: 420px;
+    max-width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+}
+
+.bottom-row {
+    margin-top: 22px;
+}
+
+.desc-block {
+    width: 100%;
+}
+
+.textarea {
+    width: 100%;
+    height: 140px;
+    padding: 12px;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+    resize: none;
+}
+
+/* 季節（丸＋チェック） */
+.season-row {
+    display: flex;
+    gap: 26px;
+    align-items: center;
+}
+
+.season-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.season-check {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.season-ui {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #cfcfcf;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.season-check:checked+.season-ui {
+    background: #333;
+    border-color: #333;
+}
+
+.season-check:checked+.season-ui::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -58%);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+
+/* ボタン行：中央の2ボタン + 右端にゴミ箱 */
+.actions-wrap {
+    position: relative;
+    margin-top: 18px;
+}
+
+/* 中央に2ボタン */
+.actions {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+}
+
+
+
+
+
+
+
+.btn-back,
+.btn-save {
+    display: inline-block;
+    width: 180px;
+    text-align: center;
+    padding: 12px 0;
+    border-radius: 4px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.10);
+    text-decoration: none;
+}
+
+.btn-back {
+    background: #dcdcdc;
+    color: #333;
+}
+
+.btn-save {
+    width: 220px;
+    background: #f4b400;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+
+
+.trash-btn {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #ff4b4b;
+}
+
+.error-message {
+    color: #ff4b4b;
+    font-size: 12px;
+    margin-top: 6px;
+}
+
+
+
+
+
+
+
+
+
+.actions {
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+}
+
+.actions-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    /* 保存とゴミ箱の間隔 */
+}
+
+
+
+.trash-btn:hover {
+    opacity: .85;
+}
+
+.trash-btn img {
+    width: 40px;
+    height: 40px;
+}

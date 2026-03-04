@@ -104,6 +104,8 @@
     <!-- 商品一覧 -->
     <div class="product-grid">
         @foreach($products as $product)
+         <a href="{{ url('/products/detail/' . $product->id) }}"
+           class="product-card-link">
             <div class="product-card">
                 <img src="{{ asset('storage/' . $product->image) }}"
                      alt="{{ $product->name }}">
@@ -112,6 +114,7 @@
                     <span>¥{{ number_format($product->price) }}</span>
                 </div>
             </div>
+        </a>
         @endforeach
     </div>
 
@@ -119,8 +122,7 @@
 
 <!-- ページネーション -->
 <div class="pagination">
-    {{ $products->appends(request()->all())
-                ->links('pagination::simple-bootstrap-4') }}
+     {{ $products->appends(request()->all())->links('pagination::bootstrap-4') }}
 </div>
 
 @endsection

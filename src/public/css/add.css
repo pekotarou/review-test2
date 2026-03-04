@@ -142,3 +142,11 @@ input[type="file"] {
     color: red;
     margin: 8px auto;
 }
+
+
+#preview {
+    display: none;
+    margin-top: 10px;
+    width: 300px;
+    border-radius: 4px;
+}

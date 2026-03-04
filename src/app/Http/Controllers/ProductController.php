@@ -6,6 +6,9 @@ use App\Http\Requests\CreateRequest;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Season;
+use App\Http\Requests\UpdateRequest;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class ProductController extends Controller
@@ -29,7 +32,6 @@ class ProductController extends Controller
     }
 
     $products = $query->paginate(6);
-
     return view('index', compact('products'));
 }
 
@@ -43,30 +45,7 @@ class ProductController extends Controller
 
 
 
-    //検索時の関数
-    public function search(Request $request)
-    {
-   /* テーブルから全てのレコードを取得する （/productに入れ込んだため、後で削除する）*/
-        $data = Product::query();
-        /* キーワードから検索処理 */
-        $keyword = $request->input('keyword');
-        $sort = $request->sort;
-        if(!empty($keyword)) {//$keyword　が空ではない場合、検索処理を実行
-            $data->where('name', 'LIKE', "%{$keyword}%")->get();
-            if ( $sort === 'high') {
-                $data->orderBy('price', 'desc');
-            }elseif ( $sort === 'low') {
-                $data->orderBy('price', 'asc');
-            }
-            $products = $data->paginate(6)->appends($request->all());
-            return view('index')->with('products',$products)
-            ->with('keyword',$keyword)
-            ->with('sort',$sort);
-        }else{
-            $products = $data->paginate(6)->appends($request->all());
-            return view('index')->with('products',$products);
-        }
-    }
+   
 
 
 
@@ -74,35 +53,88 @@ class ProductController extends Controller
 
     //商品登録ページ
     public function store(CreateRequest $request)
+    {
+
+        //画像保存先
+        $path = $request->file('image')->store('products', 'public');
+
+        //productsへ保存
+        $product = Product::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'image' => $path, 
+            'description' => $request->description,
+        ]);
+
+
+        //中間テーブルへ保存
+        $product->seasons()->attach($request->seasons);
+
+        //とりあえず登録後は商品一覧へ
+    return redirect()->route('products.index');//商品一覧へ戻る
+    }
+
+    public function detail($id)
+    {
+        $product = Product::with('seasons')->findOrFail($id);
+        $seasons = Season::all();
+
+        return view('detail', compact('product', 'seasons'));
+    }
+
+    public function update(UpdateRequest $request, $id)
 {
-    // バリデーションの内容、後で別で作る、仮置き
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'price' => 'required|integer|min:0',
-        'image' => 'required|image|mimes:jpg,jpeg,png',
-        'description' => 'required|string',
-        'seasons' => 'required|array',
-        'seasons.*' => 'exists:seasons,id'
-    ]);
+    $product = Product::findOrFail($id);
 
-    //画像保存先
-    $path = $request->file('image')->store('products', 'public');
+    // 画像更新（アップされた場合のみ）
+    if ($request->hasFile('image')) {
+        $path = $request->file('image')->store('products', 'public');
+        $product->image = $path;
+    }
 
-    //productsへ保存
-    $product = Product::create([
+    // 商品更新
+    $product->update([
         'name' => $request->name,
         'price' => $request->price,
-        'image' => $path, 
         'description' => $request->description,
     ]);
 
+    // 季節更新（中間テーブル）
+    $product->seasons()->sync($request->seasons);
 
-    //中間テーブルへ保存
-    $product->seasons()->attach($request->seasons);
-
-    //とりあえず登録後は商品一覧へ
-    $products = Product::query() ->paginate(6);
-
-    return view('index', compact('products'));//商品一覧へ戻る
+    // 商品一覧へ戻る
+    return redirect()->route('products.index');
 }
+
+
+    public function edit($id)
+{
+    $product = Product::with('seasons')->findOrFail($id);
+    $seasons = Season::all();
+
+    return view('detail', compact('product', 'seasons')); 
+    // もし edit.blade.php に分けるなら view('products.edit', ...) に変更
+}
+
+
+public function destroy($id)
+{
+    $product = Product::with('seasons')->findOrFail($id);
+
+    // 中間テーブル解除
+    $product->seasons()->detach();
+
+    // 画像ファイル削除（publicディスク）
+    if ($product->image && Storage::disk('public')->exists($product->image)) {
+        Storage::disk('public')->delete($product->image);
+    }
+
+    // products削除
+    $product->delete();
+
+    // 一覧へ戻る（メッセージ付き）
+    return redirect()->route('products.index')->with('success', '商品を削除しました');
+}
+
+
 }

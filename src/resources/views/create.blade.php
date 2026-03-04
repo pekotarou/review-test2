@@ -37,7 +37,11 @@
         {{-- 商品画像 --}}
         <div class="form-group">
             <label>商品画像 <span class="required">必須</span></label>
-            <input type="file" name="image">
+            <img id="preview" src="#" style="display:none; margin-top:10px; width:200px;">
+            <input type="file" name="image" id="imageInput">
+          
+
+            
             @foreach ($errors->get('image') as $message)
                 <p class="error-message">  {{$message }} </p>
             @endforeach
@@ -87,6 +91,26 @@
     </form>
 </div>
 
+
+
+
+<script>
+document.getElementById('imageInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    const preview = document.getElementById('preview');
+
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+            preview.src = event.target.result;
+            preview.style.display = 'block';
+        }
+
+        reader.readAsDataURL(file);
+    }
+});
+</script>
 
 
 

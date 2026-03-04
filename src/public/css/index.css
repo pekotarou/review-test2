@@ -106,11 +106,6 @@
     font-size: 16px;
 }
 
-/* ページネーション */
-.pagination {
-    margin-top: 30px;
-    text-align: center;
-}
 
 .sort-tag {
     display: inline-flex;
@@ -146,4 +141,61 @@
 
 .tag-close:hover {
     opacity: 0.8;
+}
+
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    
+}
+
+
+
+/* ページネーション中央 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* リスト横並び */
+.pagination ul.pagination {
+    display: flex;
+    gap: 12px;
+    list-style: none;
+}
+
+/* 共通ボタン */
+.pagination .page-link {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: #fff;
+    color: #666;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* hover */
+.pagination .page-link:hover {
+    background: #f4b400;
+    color: white;
+    border-color: #f4b400;
+}
+
+/* 現在ページ */
+.pagination .page-item.active .page-link {
+    background: #f4b400;
+    color: white;
+    border-color: #f4b400;
+}
+
+/* 前後ボタン */
+.pagination .page-item:first-child .page-link,
+.pagination .page-item:last-child .page-link {
+    background: #fff;
 }

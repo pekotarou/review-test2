@@ -26,7 +26,7 @@ class CreateRequest extends FormRequest
         return [
 		'name' => ['required'],
 		'price' => ['required', 'integer','between:0,10000'],
-		'image' => ['required','image','mimes:jpeg,png'],
+		'image' => ['required','mimes:jpeg,png'],
 		'seasons' => ['required', 'array'],
         'seasons.*' => ['exists:seasons,id'],
 		'description' => ['required',  'string', 'max:120'],
@@ -43,7 +43,6 @@ class CreateRequest extends FormRequest
 		'price.integer' => '数値で入力してください',
 		'price.between' => '0~10000円以内で入力してください',
 		'image.required' => '商品画像を登録してください',
-		'image.image' => '画像ファイルを選択してください',
 		'image.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
 		'seasons.required' => '季節を選択してください',
         'seasons.*.exists' => '季節を選択してください',
