@@ -41,6 +41,14 @@ php artisan migrate
 7. シーディングの実行
 ``` bash
 php artisan db:seed
+```
+
+8. 画像を入れる
+
+storage/app/publicにproductsのディレクトリ作成
+以下の画像をproductsに挿入
+- fruits-img: https://drive.google.com/file/d/1O_3WqPdrU9fOEdbKEkrJ_qMN0CcLD53d/view?usp=drive_link
+``` bash
 php artisan storage:link
 ```
 
