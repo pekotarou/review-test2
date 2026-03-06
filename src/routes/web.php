@@ -42,7 +42,6 @@ Route::delete('/products/{id}/delete', [ProductController::class, 'destroy'])
     ->name('products.delete')
     ->where('id', '[0-9]+');
 
-    
 
 
 

@@ -13,7 +13,7 @@
   @csrf
   @method('PUT')
 
-  {{-- 上段：2カラム --}}
+  <!-- 上段：2カラム -->
   <div class="top-row">
     {{-- 左：画像 --}}
     <div class="left">
@@ -38,7 +38,7 @@
       @endforeach
     </div>
 
-    {{-- 右：フォーム --}}
+   <!-- 右：フォーム -->
     <div class="right">
       <div class="field">
         <label class="field-label">商品名</label>
@@ -80,7 +80,7 @@
     </div>
   </div>
 
-  {{-- 下段：商品説明（横いっぱい） --}}
+ <!-- 下段：商品説明 -->
   <div class="bottom-row">
     <div class="desc-block">
       <label class="field-label">商品説明</label>
@@ -90,7 +90,7 @@
       @endforeach
     </div>
 
-    {{-- ボタン（商品説明の下） --}}
+    <!--ボタン（商品説明の下） -->
    
     <div class="actions">
   <a class="btn-back" href="{{ route('products.index') }}">戻る</a>
@@ -98,7 +98,7 @@
   <div class="actions-right">
     <button class="btn-save" type="submit">変更を保存</button>
 
-    {{--  ゴミ箱：クリックで削除フォームを送信 --}}
+  <!-- ゴミ箱：クリックで削除フォームを送信 -->
    
     <button type="button"
         class="trash-btn"
@@ -123,7 +123,7 @@
 
 
 
-{{-- 画像プレビュー --}}
+<!-- 画像プレビュー -->
 <script>
 document.getElementById('imageInput').addEventListener('change', function(e) {
   const file = e.target.files[0];

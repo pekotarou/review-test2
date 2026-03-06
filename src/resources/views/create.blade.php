@@ -15,7 +15,7 @@
     <form action="/products/register" method="POST" enctype="multipart/form-data">
         @csrf
 
-        {{-- 商品名 --}}
+        <!-- 商品名 -->
         <div class="form-group">
             <label>商品名 <span class="required">必須</span></label>
             <input type="text" name="name" placeholder="商品名を入力" value="{{ old('name') }}">
@@ -25,7 +25,7 @@
             
         </div>
 
-        {{-- 価格 --}}
+       <!-- 価格 -->
         <div class="form-group">
             <label>価格 <span class="required">必須</span></label>
             <input type="number" name="price" placeholder="価格を入力" value="{{ old('price') }}">
@@ -34,7 +34,7 @@
             @endforeach
         </div>
 
-        {{-- 商品画像 --}}
+       <!-- 商品画像 -->
         <div class="form-group">
             <label>商品画像 <span class="required">必須</span></label>
             <img id="preview" src="#" style="display:none; margin-top:10px; width:200px;">
@@ -47,7 +47,7 @@
             @endforeach
         </div>
 
-        {{-- 季節 --}}
+        <!-- 季節 -->
         <div class="form-group">
             <label>
                 季節 <span class="required">必須</span>
@@ -74,7 +74,7 @@
 
         </div>
 
-        {{-- 商品説明 --}}
+       <!-- 商品説明 -->
         <div class="form-group">
             <label>商品説明 <span class="required">必須</span></label>
             <textarea name="description" placeholder="商品の説明を入力">{{ old('description') }}</textarea>

@@ -79,7 +79,7 @@
                 </select>
             </form>
 
-            <!-- ✖ 並び替えタグ -->
+            <!-- 並び替えタグ -->
             @if(request('sort'))
                 <div class="sort-tag">
                     <span class="tag-text">

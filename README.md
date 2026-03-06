@@ -41,6 +41,7 @@ php artisan migrate
 7. シーディングの実行
 ``` bash
 php artisan db:seed
+php artisan storage:link
 ```
 
 ## 使用技術(実行環境)
@@ -54,3 +55,7 @@ php artisan db:seed
 ## URL
 - 開発環境：http://localhost/
 - phpMyAdmin:：http://localhost:8080/
+
+## 画像
+storage/app/public/productsに以下の画像を入れています
+- fruits-img: https://drive.google.com/file/d/1O_3WqPdrU9fOEdbKEkrJ_qMN0CcLD53d/view?usp=drive_link
